@@ -1,8 +1,5 @@
 puts "Please enter a b c values of quadratic equation "
-s=gets.split(" ").map { |i| i.to_f }
-a=s[0]
-b=s[1]
-c=s[2]
+a,b,c=gets.split(" ").map { |i| i.to_f }
 d=b*b - 4*a*c
 if d<0
 	puts "D=#{d}, no roots"
