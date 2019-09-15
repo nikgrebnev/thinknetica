@@ -13,4 +13,3 @@ basket.each do |k,v|
   puts "Name: #{k}, price: #{v[0]}, quantity: #{v[1]}, cost #{current}"
 end
 puts "==== Total: #{total} ===="
-

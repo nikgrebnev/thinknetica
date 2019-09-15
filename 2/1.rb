@@ -10,6 +10,4 @@ months = { jan: 31,
            oct: 31,
            nov: 30,
            dec: 31 }
-months.each do |k,v|
-  puts k.to_s if v == 30
-end
+months.each { |k,v| puts k.to_s if v == 30 }
