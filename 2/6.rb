@@ -1,15 +1,18 @@
 puts "Please enter goods name, price and quantity separated by space. And стоп when done"
-basket = Hash.new
+basket = {}
 loop do
-  name,price,quantity = gets.split(" ")
-  break if name == 'стоп'
-  basket[name] = [price.to_f, quantity.to_f]
+  input_vals = gets.split(" ")
+  break if input_vals[0] == 'стоп'
+  name = input_vals[0...-2].join(" ")
+  price = input_vals[-2]
+  quantity = input_vals[-1]
+  basket[name] = { price: price.to_f, quantity: quantity.to_f}
 end
 total = 0.0
 puts "=============================="
-basket.each do |k,v|
-  current = v[0] * v[1]
+basket.each do |name,vals|
+  current = vals[:price] * vals[:quantity]
   total += current
-  puts "Name: #{k}, price: #{v[0]}, quantity: #{v[1]}, cost #{current}"
+  puts "Name: #{name}, price: #{vals[:price]}, quantity: #{vals[:quantity]}, cost #{current}"
 end
 puts "==== Total: #{total} ===="

@@ -1,6 +1,6 @@
-vowels = ['A', 'E', 'I', 'O', 'U']
-result = Hash.new
-('A'..'Z').each_with_index do |k,v|
-  result[k] = v if vowels.include?(k) 
+vowels = %w[A E I O U] #['A', 'E', 'I', 'O', 'U']
+result = {}
+('A'..'Z').each.with_index(1) do |character,id|
+  result[character] = id if vowels.include?(character) 
 end
 puts result
