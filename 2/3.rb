@@ -1,7 +1,5 @@
-a = [0]
-i=1
-while i < 100
+a = [0,1]
+while 100 > i = (a[-1] + a[-2])
   a << i
-  i = a[-1] + a[-2]
 end
 puts a

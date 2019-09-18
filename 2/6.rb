@@ -10,7 +10,7 @@ loop do
 end
 total = 0.0
 puts "=============================="
-basket.each do |name,vals|
+basket.each do |name, vals|
   current = vals[:price] * vals[:quantity]
   total += current
   puts "Name: #{name}, price: #{vals[:price]}, quantity: #{vals[:quantity]}, cost #{current}"
