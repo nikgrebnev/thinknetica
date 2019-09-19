@@ -15,14 +15,9 @@ class Station
   end
 
   def trains_print_type(type)
-    num = 0
-    @trains.each do |train| 
-      if train.type == type
-        puts train.number 
-        num += 1
-      end
-    end
-    puts "=== Station #{@name}: count of trains #{type} is #{num} ==="
+    @trains.each { |train| puts train.number if train.type == type }
+    puts "=== Station #{@name}: count of trains #{type} is #{@trains.select { |train| train.type == type }.size  } ==="
+    # вот я лично сильно сомневаюсь, что эта конструкция более читаема чем то что было.
   end
   
   def train_departure(train)
@@ -34,15 +29,19 @@ class Route
   attr_reader :route
 
   def initialize(station_from, station_to)
-    @route = [station_from,station_to]
+    @route = [station_from, station_to]
   end
 
   def station_add(station)
     @route.insert(-2, station)
   end
 
+  def station_is_middle(station)
+    station != @route[0] && station != @route[-1]
+  end
+
   def station_remove(station)
-    @route.delete(station) if station != @route[0] && station != @route[-1]
+    @route.delete(station) if station_is_middle
   end
 
   def route_print
@@ -52,9 +51,9 @@ end
 
 class Train
   attr_accessor :speed
-  attr_reader :carriage, :number
+  attr_reader :carriage, :number, :type
 
-  def initialize(number,type,carriage)
+  def initialize(number, type, carriage)
     @number = number
     @type = type
     @carriage = carriage
@@ -67,8 +66,6 @@ class Train
   def carriage_change(num)
     @carriage += num if @speed == 0 && num.abs == 1
     @carriage = 1 if @carriage < 1
-    #думаю что все-таки у поезда с вогонами не может быть менее 1 вагона
-    #@carriage = 0 if @carriage < 0
   end
 
   def new_route(route)
@@ -94,10 +91,10 @@ class Train
   end
 
   def where_in_route
-    #puts "===== where in route = @current_station=#{@current_station} ==="
-    [ @current_station>0 ? @route.route[@current_station-1] : nil ,
+    [ @current_station > 0 ? @route.route[@current_station - 1] : nil ,
       @route.route[@current_station] ,
-      @current_station < (@route.route.length - 1) ? @route.route[@current_station+1] : nil ]
+      @current_station < (@route.route.length - 1) ? @route.route[@current_station + 1] : nil 
+    ]
   end  
 end
 
