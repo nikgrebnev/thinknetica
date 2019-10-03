@@ -5,24 +5,19 @@ module InstanceCounter
   end
 
   module ClassMethods
-
-#	@@instances = 0
+    attr_writer :instances
 
     def instances
-	@@instances
+      @instances ||= 0
     end
   end
 
   module InstanceMethods
+
     def register_instance
-	@@instances += 1
-#register_instance
-#, который увеличивает счетчик кол-ва экземпляров класса и который можно вызвать из конструктора. При этом данный метод не должен быть публичным.
+      self.class.instances += 1
     end
 
-    def print_class
-      puts self.class
-    end
   end
 end
 

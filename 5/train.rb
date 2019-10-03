@@ -2,8 +2,6 @@ class Train
   include Producer
   include  InstanceCounter
 
-@@instances=0
-
   attr_accessor :speed
   attr_reader :carriages, :number, :type
 
@@ -16,6 +14,7 @@ class Train
 
   def initialize(number, num_carriages)
     @number = number
+    self.register_instance
   end
   
   def brake
