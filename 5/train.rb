@@ -1,5 +1,8 @@
 class Train
   include Producer
+  include  InstanceCounter
+
+@@instances=0
 
   attr_accessor :speed
   attr_reader :carriages, :number, :type

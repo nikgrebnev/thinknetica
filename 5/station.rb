@@ -1,5 +1,8 @@
 class Station
+  include  InstanceCounter
   attr_reader :trains,:name
+
+@@instances=0
 
   def self.all
     ObjectSpace.each_object(self).to_a

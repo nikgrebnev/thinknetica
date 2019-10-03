@@ -1,7 +1,11 @@
+require_relative 'producer'
+require_relative 'instance_counter'
+
+
 require_relative 'station'
 require_relative 'route'
 
-require_relative 'producer'
+
 
 require_relative 'carriage'
 require_relative 'cargo_carriage'
