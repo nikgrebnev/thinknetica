@@ -5,16 +5,19 @@ class Train
   attr_accessor :speed
   attr_reader :carriages, :number, :type
 
+  @@trains = {}
+
   def self.find(num)
-    t_arr = ObjectSpace.each_object(self).to_a
-    puts t_arr.inspect
-    t_arr.each { |t| return t if t.number == num }
-    nil
+    @@trains[num]
+#    t_arr = ObjectSpace.each_object(self).to_a
+#    puts t_arr.inspect
+#    t_arr.each { |t| return t if t.number == num }
   end
 
   def initialize(number, num_carriages)
     @number = number
     self.register_instance
+    @@trains[number] = self
   end
   
   def brake
