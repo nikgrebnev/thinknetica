@@ -1,15 +1,19 @@
 class Station
   include  InstanceCounter
   attr_reader :trains,:name
+  
+  @@stations = []
 
   def self.all
-    ObjectSpace.each_object(self).to_a
+    @@stations
+#    ObjectSpace.each_object(self).to_a
   end
 
   def initialize(name)
     @name = name
     @trains = []
     self.register_instance
+    @@stations << self
   end
 
   def train_add(train)
