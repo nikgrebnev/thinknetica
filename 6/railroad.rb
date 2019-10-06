@@ -47,6 +47,8 @@ class RailRoad
     end
     stations.each { |station| return false if station.name == station_name }
     @stations << Station.new(station_name)
+  rescue
+    puts "!!! Ошибка! Некорректное название станции. Станция не создана"
   end
 
   def station_print_trains(station)
@@ -105,6 +107,8 @@ class RailRoad
     print "Введите количество вагонов:"
     num_carriages = gets.chomp.to_i
     @trains << CargoTrain.new(train_number, num_carriages)
+  rescue Exception => e
+    puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
 
   def train_create_passenger
@@ -113,6 +117,8 @@ class RailRoad
     print "Введите количество вагонов:"
     num_carriages = gets.chomp.to_i
     @trains << PassengerTrain.new(train_number, num_carriages)
+  rescue Exception => e
+    puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
   
   def train_set_route(train)

@@ -3,7 +3,9 @@ class Train
   include  InstanceCounter
 
   attr_accessor :speed
-  attr_reader :carriages, :number, :type
+  attr_reader :carriages, :number, :type, :num_carriages
+
+  NUMBER_FORMAT = /^[а-яa-z0-9]{3}-{0,1}[а-яa-z0-9]{2}$/i
 
   @@trains = {}
 
@@ -16,6 +18,8 @@ class Train
 
   def initialize(number, num_carriages)
     @number = number
+    @num_carriages = num_carriages
+    validate!
     self.register_instance
     @@trains[number] = self
   end
@@ -64,5 +68,19 @@ class Train
       @route.route[@current_station] ,
       @current_station < (@route.route.length - 1) ? @route.route[@current_station + 1] : nil 
     ]
+  end
+
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
+  protected
+
+  def validate!
+    raise "Некорректное название" if number !~ NUMBER_FORMAT
+    raise "Некорректное количество вагонов" if num_carriages < 1
+    true
   end
 end

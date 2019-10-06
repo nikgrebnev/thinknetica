@@ -1,8 +1,10 @@
 class Station
   include  InstanceCounter
   attr_reader :trains,:name
-  
+
   @@stations = []
+
+  NAME_FORMAT = /^[a-яa-z0-9\- ]+$/i
 
   def self.all
     @@stations
@@ -11,6 +13,7 @@ class Station
 
   def initialize(name)
     @name = name
+    validate!
     @trains = []
     self.register_instance
     @@stations << self
@@ -35,4 +38,16 @@ class Station
   def train_departure(train)
     @trains.delete(train)
   end 
+
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
+  protected
+
+  def validate!
+    raise "Некорректное название" if name !~ NAME_FORMAT
+  end
 end
