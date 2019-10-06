@@ -1,7 +1,5 @@
 class Train
-  include Producer
-  include InstanceCounter
-  include ValidCheck
+  include Producer, InstanceCounter, Functions
 
   attr_accessor :speed
   attr_reader :carriages, :number, :type, :num_carriages

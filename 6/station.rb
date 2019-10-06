@@ -1,11 +1,11 @@
 class Station
-  include InstanceCounter
-  include ValidCheck
+  include InstanceCounter, Functions
+
   attr_reader :trains,:name
 
   @@stations = []
 
-  NAME_FORMAT = /^[a-яa-z0-9\- ]+$/i
+  NAME_FORMAT = /^[a-яa-z0-9\-, ]+$/i
 
   def self.all
     @@stations
