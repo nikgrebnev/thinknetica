@@ -1,6 +1,7 @@
 class Train
   include Producer
-  include  InstanceCounter
+  include InstanceCounter
+  include ValidCheck
 
   attr_accessor :speed
   attr_reader :carriages, :number, :type, :num_carriages
@@ -70,17 +71,10 @@ class Train
     ]
   end
 
-  def valid?
-    validate!
-  rescue
-    false
-  end
-
   protected
 
   def validate!
     raise "Некорректное название" if number !~ NUMBER_FORMAT
     raise "Некорректное количество вагонов" if num_carriages < 1
-    true
   end
 end

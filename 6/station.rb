@@ -1,5 +1,6 @@
 class Station
-  include  InstanceCounter
+  include InstanceCounter
+  include ValidCheck
   attr_reader :trains,:name
 
   @@stations = []
@@ -38,12 +39,6 @@ class Station
   def train_departure(train)
     @trains.delete(train)
   end 
-
-  def valid?
-    validate!
-  rescue
-    false
-  end
 
   protected
 

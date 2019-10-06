@@ -1,6 +1,4 @@
-require_relative 'producer'
-require_relative 'instance_counter'
-
+require_relative 'modules'
 
 require_relative 'station'
 require_relative 'route'
