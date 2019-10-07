@@ -1,6 +1,7 @@
 class CargoCarriage < Carriage
-
-  def initialize(train_name)
+  attr_reader :reserved
+  
+  def initialize(train_name, volume)
     @type = :cargo
     super
   end

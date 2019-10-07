@@ -53,7 +53,7 @@ class RailRoad
 
   def station_print_trains(station)
     if station_exists?(station)
-      @stations[station].trains_print
+      @stations[station].trains_print.each { |train| puts "Поезд #{train.number}, тип #{train.type.to_s}, количество вагонов #{train.carriages.size}" }
     else
       puts "Станции с таким номером нет. Проверьте корректность ввода"
       return false
@@ -101,31 +101,45 @@ class RailRoad
     end
   end
 
-  def train_create_cargo
-    print "============  Создание грузового поезда. Введите номер:"
-    train_number = gets.chomp
-    print "Введите количество вагонов:"
-    num_carriages = gets.chomp.to_i
+  def train_create_cargo(train_number = nil, num_carriages = nil)
+    if train_number.nil?
+      print "============  Создание грузового поезда. Введите номер:"
+      train_number = gets.chomp
+    end
+    if num_carriages.nil?
+      print "Введите количество вагонов:"
+      num_carriages = gets.chomp.to_i
+    end
     @trains << CargoTrain.new(train_number, num_carriages)
   rescue Exception => e
     puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
 
-  def train_create_passenger
-    print "============  Создание пассажирского поезда. Введите номер:"
-    train_number = gets.chomp
-    print "Введите количество вагонов:"
-    num_carriages = gets.chomp.to_i
+  def train_create_passenger(train_number = nil, num_carriages = nil)
+    if train_number.nil?
+      print "============  Создание пассажирского поезда. Введите номер:"
+      train_number = gets.chomp
+    end
+    if num_carriages.nil?
+      print "Введите количество вагонов:"
+      num_carriages = gets.chomp.to_i
+    end
     @trains << PassengerTrain.new(train_number, num_carriages)
   rescue Exception => e
     puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
   
-  def train_set_route(train)
-    return if !route_list
-    print "Введите номер маршрута на который передвигаем поезд:"
-    route = gets.chomp.to_i
+  def train_set_route(train, route = nil)
+    if route.nil?
+      return if !route_list
+      print "Введите номер маршрута на который передвигаем поезд:"
+      route = gets.chomp.to_i
+    end
     @trains[train].new_route(@routes[route])
+  end
+
+  def train_move_forward(train)
+    @trains[train].move_forward
   end
 
   def train_manage_menu
@@ -151,9 +165,9 @@ class RailRoad
         when 1 then train_set_route train
         when 2 then @trains[train].carriage_add
         when 3 then @trains[train].carriage_remove
-        when 4 then @trains[train].move_forward
+        when 4 then train_move_forward train
         when 5 then @trains[train].move_back
-        when 6 then @trains[train].print_station
+        when 6 then puts @trains[train].print_station
         end
       end
     end
@@ -304,5 +318,44 @@ class RailRoad
     route_station_add 2, 6
     route_station_add 2, 7
     route_station_add 2, 8
+    train_create_cargo("111-11", 12)
+    train_create_cargo("111-12", 11)
+    train_create_cargo("111-13", 10)
+    train_create_cargo("111-14", 9)
+    train_create_cargo("111-15", 8)
+    train_create_cargo("111-16", 7)
+    train_create_cargo("111-17", 6)
+    train_create_cargo("111-18", 5)
+    train_create_passenger("211-11", 12)
+    train_create_passenger("211-12", 11)
+    train_create_passenger("211-13", 10)
+    train_create_passenger("211-14", 9)
+    train_create_passenger("211-15", 8)
+    train_create_passenger("211-16", 7)
+    train_create_passenger("211-17", 6)
+    train_create_passenger("211-18", 5)
+    train_set_route(0,0)
+    train_set_route(1,1)
+    train_move_forward(1)
+    train_set_route(2,2)
+    train_set_route(3,0)
+    train_move_forward(3)
+    train_set_route(4,1)
+    train_set_route(5,2)
+    train_move_forward(5)
+    train_set_route(6,0)
+    train_set_route(7,1)
+    train_move_forward(7)
+    train_set_route(8,2)
+    train_set_route(9,0)
+    train_move_forward(9)
+    train_set_route(10,1)
+    train_set_route(11,2)
+    train_move_forward(11)
+    train_set_route(12,0)
+    train_set_route(13,1)
+    train_move_forward(13)
+    train_set_route(14,2)
+    train_set_route(15,0)
   end
 end

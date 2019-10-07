@@ -41,9 +41,11 @@ class Train
   end
 
   def new_route(route)
+#    puts "new route #{route.inspect} to train #{self.inspect}"
     @route = route
     @current_station = 0
     @route.route[@current_station].train_add(self)
+#    puts print_station
   end
 
   def move_forward
@@ -67,6 +69,10 @@ class Train
       @route.route[@current_station] ,
       @current_station < (@route.route.length - 1) ? @route.route[@current_station + 1] : nil 
     ]
+  end
+
+  def use_block(&block)
+    @carriages.each { |carriage| block.call(carriage)}
   end
 
   protected

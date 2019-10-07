@@ -26,7 +26,7 @@ class Station
 
   def trains_print
     trains_num = []
-    @trains.each { |train| trains_num << train.number }
+    @trains.each { |train| trains_num << train}
     trains_num
   end
 
@@ -39,6 +39,10 @@ class Station
   def train_departure(train)
     @trains.delete(train)
   end 
+
+  def use_block(&block)
+    @trains.each { |train| block.call(train)}
+  end
 
   protected
 
