@@ -131,7 +131,7 @@ class RailRoad
   
   def train_set_route(train, route = nil)
     if route.nil?
-      return if !route_list
+      return unless route_list
       print "Введите номер маршрута на который передвигаем поезд:"
       route = gets.chomp.to_i
     end
@@ -143,7 +143,7 @@ class RailRoad
   end
 
   def train_manage_menu
-    return if !train_list
+    return unless train_list
     print "Введите номер поезда, которым будете управлять:"
     train = gets.chomp.to_i
     if @trains[train].nil?
@@ -217,7 +217,7 @@ class RailRoad
 
   def route_show(route = nil)
     if route.nil?
-      return if !route_list
+      return unless route_list
       print "Введите номер маршрута, который необходимо посмотреть:"
       route = gets.chomp.to_i
     end
@@ -228,7 +228,7 @@ class RailRoad
 
   def route_station_add(route, station_num = nil)
     if station_num.nil?
-      return if !station_list
+      return unless station_list
       print "Введите номер станции, которую надо добавть в маршрут:"
       station_num = gets.chomp.to_i
     end
@@ -240,7 +240,7 @@ class RailRoad
 
   def route_station_delete(route, station_num = nil)
     if station_num.nil?
-      return if !station_list
+      return unless station_list
       print "Введите номер станции, которую надо удалить из маршрута:"
       station_num = gets.chomp.to_i
     end
@@ -251,7 +251,7 @@ class RailRoad
   end
 
   def route_edit
-    return if !route_list
+    return unless route_list
     print "Введите номер маршрута, в который необходимо отредактировать:"
     route = gets.chomp.to_i
     if @routes[route].nil?
@@ -357,5 +357,19 @@ class RailRoad
     train_move_forward(13)
     train_set_route(14,2)
     train_set_route(15,0)
+    puts "==================== использование блока для станций ======================="
+    Station.all.each do |station|
+      puts "====== использование блока для станции #{station.name} ========"
+      station.use_block do |train| 
+        puts "Поезд #{train.number}, тип #{train.type.to_s}, количество вагонов #{train.carriages.size}"
+        puts "--------- использование блока для данного поезда ---------"
+        carriage_num = 0
+        train.use_block do |carriage|
+          puts "Вагон номер #{carriage_num += 1}, тип #{carriage.type},свободно, #{carriage.free_volume}, занято #{carriage.reserved}"
+        end
+        puts "----------------------------------------------------------"
+      end
+      puts "======================================================================"
+    end
   end
 end
