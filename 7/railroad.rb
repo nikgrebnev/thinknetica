@@ -357,16 +357,16 @@ class RailRoad
     train_move_forward(13)
     train_set_route(14,2)
     train_set_route(15,0)
-    # У меня не получается код снизу перевести на Proc.new
-#    carriages_block = Proc.new { |carriage| puts "Вагон номер #{carriage_num += 1}, тип #{carriage.type},свободно, #{carriage.free_volume}, занято #{carriage.reserved}" } 
+    carriages_block = proc { |carriage, i| puts "Вагон номер #{i}, тип #{carriage.type}, свободно #{carriage.free_volume}, занято #{carriage.reserved}" } 
     puts "==================== использование блока для станций ======================="
     Station.all.each do |station|
       puts "====== использование блока для станции #{station.name} ========"
       station.each_train do |train| 
         puts "Поезд #{train.number}, тип #{train.type.to_s}, количество вагонов #{train.carriages.size}"
         puts "--------- использование блока для данного поезда ---------"
-        carriage_num = 0
-        train.each_carriage { |carriage| puts "Вагон номер #{carriage_num += 1}, тип #{carriage.type},свободно, #{carriage.free_volume}, занято #{carriage.reserved}" } 
+        train.each_carriage do |carriage, i| 
+          carriages_block.call(carriage, i)
+        end
         puts "----------------------------------------------------------"
       end
       puts "======================================================================"
