@@ -71,8 +71,8 @@ class Train
     ]
   end
 
-  def use_block(&block)
-    @carriages.each { |carriage| block.call(carriage)}
+  def each_carriage
+    @carriages.each { |carriage| yield(carriage)}
   end
 
   protected

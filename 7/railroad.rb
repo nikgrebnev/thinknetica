@@ -362,11 +362,11 @@ class RailRoad
     puts "==================== использование блока для станций ======================="
     Station.all.each do |station|
       puts "====== использование блока для станции #{station.name} ========"
-      station.use_block do |train| 
+      station.each_train do |train| 
         puts "Поезд #{train.number}, тип #{train.type.to_s}, количество вагонов #{train.carriages.size}"
         puts "--------- использование блока для данного поезда ---------"
         carriage_num = 0
-        train.use_block { |carriage| puts "Вагон номер #{carriage_num += 1}, тип #{carriage.type},свободно, #{carriage.free_volume}, занято #{carriage.reserved}" } 
+        train.each_carriage { |carriage| puts "Вагон номер #{carriage_num += 1}, тип #{carriage.type},свободно, #{carriage.free_volume}, занято #{carriage.reserved}" } 
         puts "----------------------------------------------------------"
       end
       puts "======================================================================"

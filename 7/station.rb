@@ -40,8 +40,8 @@ class Station
     @trains.delete(train)
   end 
 
-  def use_block(&block)
-    @trains.each { |train| block.call(train)}
+  def each_train
+    @trains.each { |train| yield(train)}
   end
 
   protected
