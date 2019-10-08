@@ -14,10 +14,9 @@ class Carriage
     @total - @reserved
   end
 
-  def reserve(volume = 1)
+  def reserve(volume)
     if free_places >= volume
       @reserved += volume
-      true
     end
   end
 

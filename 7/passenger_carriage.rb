@@ -5,5 +5,9 @@ class PassengerCarriage < Carriage
     @type = :passenger
     super
   end
+
+  def reserve
+    super(1)
+  end
 end
 
