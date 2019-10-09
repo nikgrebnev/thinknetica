@@ -111,7 +111,7 @@ class RailRoad
       num_carriages = gets.chomp.to_i
     end
     @trains << CargoTrain.new(train_number, num_carriages)
-  rescue Exception => e
+  rescue StandardError => e
     puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
 
@@ -125,7 +125,7 @@ class RailRoad
       num_carriages = gets.chomp.to_i
     end
     @trains << PassengerTrain.new(train_number, num_carriages)
-  rescue Exception => e
+  rescue StandardError => e
     puts "Возникла ошибка #{e.message}. Поезд не создан."
   end
 
