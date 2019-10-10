@@ -1,8 +1,8 @@
 class Station
-  include Functions, InstanceCounter
+  include Functions
+  include InstanceCounter
   extend Accessors
   include Validation
-
 
   attr_reader :trains, :name
 

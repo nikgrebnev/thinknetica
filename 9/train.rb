@@ -1,8 +1,9 @@
 class Train
-  include Functions, InstanceCounter, Producer
+  include Functions
+  include InstanceCounter
+  include Producer
   extend Accessors
   include Validation
-
 
   attr_accessor_with_history :speed
   attr_reader :carriages, :number, :type, :num_carriages
@@ -83,7 +84,5 @@ class Train
     raise 'Пустой номер' unless validate! @number, :presence
     raise 'Некорректное название' unless validate! @number, :format, NUMBER_FORMAT
     raise 'Некорректное количество вагонов' if num_carriages < 1
-#    raise 'Некорректное название' if number !~ NUMBER_FORMAT
-#    raise 'Некорректное количество вагонов' if num_carriages < 1
   end
 end

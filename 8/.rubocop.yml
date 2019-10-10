@@ -18,7 +18,8 @@ Style/GuardClause:
   Enabled: false
 Style/ClassVars:
   Enabled: false
-
+Style/AsciiComments:
+  Enabled: false
 
 
 
