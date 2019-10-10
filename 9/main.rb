@@ -1,4 +1,9 @@
-require_relative 'modules'
+require_relative 'accessors.rb'
+require_relative 'functions.rb'
+require_relative 'instance_counter.rb'
+require_relative 'producer.rb'
+require_relative 'validation.rb'
+
 
 require_relative 'station'
 require_relative 'route'
@@ -16,3 +21,5 @@ require_relative 'railroad'
 rr = RailRoad.new
 
 rr.menu_main
+
+
