@@ -1,7 +1,6 @@
 class Game
   STAKE = 10
 
-
   def main_menu
     puts "Добро пожаловать в наш санаторий для наслаждающихся игровой зависимостью!"
     puts "У нас вы можете чувствовать в полной безопасности!"
@@ -9,7 +8,7 @@ class Game
     print "Как вас называть? :"
     name = gets.chomp
     @slave = Player.new(name, :showed)
-    @master = Player.new("Крупье", :hidden)
+    @master = Player.new('Крупье', :hidden)
     @players = [@master, @slave]
     new_game
   rescue StandardError => e
@@ -25,7 +24,7 @@ class Game
 
   def show_table
     puts "===== Стол ====="
-    print "Банк #{@bank}"
+    puts "Банк #{@bank}"
     @players.each do |p| 
       puts "Игрок #{p.to_s}, карты на руках #{p.print_cards}, деньги на руках #{p.money}"
     end
