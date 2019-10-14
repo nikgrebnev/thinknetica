@@ -36,11 +36,7 @@ class Game
 
   def start_game
     loop do
-      puts "====================================================Новый ход ===================="
-#      @master.type = @master.type_default
       @deck = Deck.new
-#      puts "Проверка очистки руки =="
-#     show_table
       @players.each(&:clear_hand)
       2.times do
         @players.each { |p| p.give_card @deck }
@@ -50,7 +46,6 @@ class Game
         @bank += p.change_money -STAKE
       end
       loop do
-        puts "------------------- начало цикла -----------------------------------------------"
         @turn_stop = 0
         turn_slave
         turn_master if @turn_stop == 0
@@ -103,7 +98,6 @@ class Game
       @slave.change_money @bank / 2
       @master.change_money @bank / 2
     elsif master_score > MAX_SCORE || (master_score < slave_score && slave_score <= MAX_SCORE)
-      16>21 || (16<21 && 21<21)
       puts "Вы выиграли!\n\n\n"
       @slave.change_money @bank
     else
