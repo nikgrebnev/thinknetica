@@ -55,7 +55,7 @@ class Game
         turn_slave
         turn_master if @turn_stop == 0
         @turn_stop = 1 if @slave.max_cards && @slave.max_cards
-        if @turn_stop
+        if @turn_stop == 1
           turn_end
           break
         end
