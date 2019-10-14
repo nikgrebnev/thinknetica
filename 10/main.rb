@@ -3,6 +3,10 @@ require_relative 'deck.rb'
 require_relative 'player.rb'
 require_relative 'game.rb'
 
-game = Game.new
-
-game.main_menu
+loop do
+  game = Game.new
+  game.main_menu
+  puts ""
+  puts "Введите 1 для того, чтобы начать еще раз"
+  break unless gets.chomp.to_i == 1
+end

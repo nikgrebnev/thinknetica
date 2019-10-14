@@ -2,7 +2,8 @@ class Player
   MAX_SCORE = 21
   NAME_FORMAT = /^[a-zа-я ]+$/i.freeze
 
-  attr_reader :money
+  attr_writer :type
+  attr_reader :money, :type_default
 
   def initialize(name, type)
     @name = name
@@ -20,14 +21,23 @@ class Player
     score
   end
 
+  def max_cards
+    true if @hand.count == 3
+  end
+
+  def allowed_add_card
+    true if @hand.count == 2
+  end
+
   def change_money(val)
     @money += val
     raise @name if @money < 0
+
     -val
   end
 
-  def give_card(card)
-    @hand << card
+  def give_card(deck)
+    @hand << deck.deck.pop if @hand.count < 3
   end
 
   def clear_hand
@@ -37,10 +47,9 @@ class Player
 
   def print_cards
     str = ''
-    num = 0
     @hand.each do |card|
       card_symbol = @type == :showed ? card.to_s : '**'
-      str += "#{num}:#{card_symbol} "
+      str += "#{card_symbol} "
     end
     str
   end
@@ -55,5 +64,4 @@ class Player
     raise "Имя слишком короткое!" if @name.length < 2
     raise "Имя некорректное, можно только буквы и пробелы" if @name !~ NAME_FORMAT
   end
-
 end
