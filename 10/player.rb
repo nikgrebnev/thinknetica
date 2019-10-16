@@ -12,21 +12,16 @@ class Player
     validate!
   end
 
-  def calc_hand
-    score = 0
-    @hand.each { |card| score += card.cost }
-    @hand.each do |card|
-      score += card.cost1 if card.cost1 > 0 && (score + card.cost1 <= MAX_SCORE)
-    end
-    score
-  end
-
-  def max_cards
+  def max_cards?
     true if @hand.count == 3
   end
 
-  def allowed_add_card
+  def allowed_add_card?
     true if @hand.count == 2
+  end
+
+  def overscore?
+    calc_hand > MAX_SCORE
   end
 
   def change_money(val)
@@ -52,6 +47,19 @@ class Player
       str += "#{card_symbol} "
     end
     str
+  end
+
+  def calc_hand
+    score = 0
+    @hand.each { |card| score += card.cost }
+    @hand.each do |card|
+      score += card.cost1 if card.cost1 > 0 && (score + card.cost1 <= MAX_SCORE)
+    end
+    score
+  end
+
+  def show_score
+    @type == :showed ? calc_hand : '???'
   end
 
   def to_s
