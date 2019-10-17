@@ -24,10 +24,11 @@ class TerminalInterface
   def turn_end
     puts '===============  Текущий раунд закончился'
     show_table(true)
-    case @game.turn_end
-    when 1 then puts "Ничья\n\n\n"
-    when 2 then puts "Вы выиграли!\n\n\n"
-    when 3 then puts "Вы проиграли!\n\n\n"
+    winner = @game.turn_end
+    if winner.nil? 
+      puts "Ничья\n\n\n"
+    else 
+      puts "Выиграл #{winner.to_s}\n\n\n"
     end
   end
 
