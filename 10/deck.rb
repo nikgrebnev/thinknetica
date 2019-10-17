@@ -1,12 +1,10 @@
 class Deck
-  CARDS = %w(2 3 4 5 6 7 8 9 10 В Д К Т)
-  SUITS = [:spade, :heart, :diamond, :club]
 
   attr_reader :deck
   def initialize
     @deck = []
-    CARDS.each do |c|
-      SUITS.each do |s|
+    Card::CARDS.each do |c|
+      Card::SUITS.each do |s|
         @deck << Card.new(c, s, cost(c))
       end
     end
@@ -20,10 +18,10 @@ class Deck
   private
 
   def cost(c)
-    return [c.to_i, 0] if c.to_i > 1
+    return c.to_i if c.to_i > 1
+    
+    return 1 if c == 'Т'
 
-    return [1, 10] if c == 'Т'
-
-    [10, 0]
+    10
   end
 end
