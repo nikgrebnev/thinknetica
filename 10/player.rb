@@ -29,7 +29,7 @@ class Player
   end
 
   def give_card(deck)
-    @hand << deck.take_card if @hand.count < 3
+    @hand << deck.take_card if !max_cards?
   end
 
   def clear_hand
