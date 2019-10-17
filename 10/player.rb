@@ -1,6 +1,7 @@
 class Player
   MAX_SCORE = 21
   NAME_FORMAT = /^[a-zа-я ]+$/i.freeze
+  MAX_CARDS = 3
 
   attr_writer :type
   attr_reader :money, :type_default
@@ -13,7 +14,7 @@ class Player
   end
 
   def max_cards?
-    true if @hand.count == 3
+    @hand.count == MAX_CARDS
   end
 
   def overscore?
