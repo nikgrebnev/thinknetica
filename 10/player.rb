@@ -46,10 +46,10 @@ class Player
   end
 
   def calc_hand
-    costs = @hand.map(&:cost)
-    score = costs.sum
-    score -= 10 if score > 21 && costs.include?(11)
-    score
+    score = @hand.sum(&:cost)
+    @hand.each do |card|
+      score += 10 if card.name == 'Т' && (score + 10 <= MAX_SCORE)
+    end
 #    score = 0
 #    @hand.each { |card| score += card.cost }
 #    @hand.each do |card|
