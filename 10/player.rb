@@ -16,10 +16,6 @@ class Player
     true if @hand.count == 3
   end
 
-  def allowed_add_card?
-    true if @hand.count == 2
-  end
-
   def overscore?
     calc_hand > MAX_SCORE
   end
@@ -51,7 +47,9 @@ class Player
 
   def calc_hand
     score = 0
+    #первый цикл для того, чтобы подсчитать руку из предположения что Туз = 1
     @hand.each { |card| score += card.cost }
+    #второй цикл - если есть туз, то смотрим, можно ли добавить за него 10.
     @hand.each do |card|
       score += 10 if card.name == 'Т' && (score + 10 <= MAX_SCORE)
       # убрал по требованию cost1 (10 для Туза). Мое мнение то что было - было красивее. 

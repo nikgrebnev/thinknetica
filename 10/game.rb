@@ -26,11 +26,11 @@ class Game
   end
 
   def slave_add_card?
-    @slave.allowed_add_card?
+    !@slave.max_cards?
   end
 
   def turn_master
-    if @master.calc_hand < 17 && @master.allowed_add_card? 
+    if @master.calc_hand < 17 && !@master.max_cards?
       @master.give_card @deck
       true
     end
