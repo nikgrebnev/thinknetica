@@ -48,13 +48,8 @@ class Player
   def calc_hand
     score = @hand.sum(&:cost)
     @hand.each do |card|
-      score += 10 if card.name == 'Т' && (score + 10 <= MAX_SCORE)
+      score -= 10 if card.ace? && (score > MAX_SCORE)
     end
-#    score = 0
-#    @hand.each { |card| score += card.cost }
-#    @hand.each do |card|
-#      score += 10 if card.name == 'Т' && (score + 10 <= MAX_SCORE)
-#    end
     score
   end
 

@@ -14,4 +14,8 @@ class Card
   def to_s
     @name + @suit
   end
+
+  def ace?
+    @name == 'Т'
+  end
 end

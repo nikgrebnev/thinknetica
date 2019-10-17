@@ -20,7 +20,7 @@ class Deck
   def cost(c)
     return c.to_i if c.to_i > 1
     
-    return 1 if c == 'Т'
+    return 11 if c == 'Т'
 
     10
   end
