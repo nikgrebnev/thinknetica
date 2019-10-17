@@ -22,7 +22,7 @@ class TerminalInterface
   end
 
   def turn_end
-    puts "===============  Текущий раунд закончился"
+    puts '===============  Текущий раунд закончился'
     show_table(true)
     case @game.turn_end
     when 1 then puts "Ничья\n\n\n"

@@ -32,7 +32,7 @@ class Player
   end
 
   def give_card(deck)
-    @hand << deck.deck.pop if @hand.count < 3
+    @hand << deck.take_card if @hand.count < 3
   end
 
   def clear_hand

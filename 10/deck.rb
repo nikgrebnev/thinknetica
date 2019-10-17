@@ -13,6 +13,11 @@ class Deck
     @deck.shuffle!
   end
 
+
+  def take_card
+    @deck.pop
+  end
+  
   private
 
   def cost(c)
