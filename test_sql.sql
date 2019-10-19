@@ -61,8 +61,8 @@ update tests set title = 'Тест 1', level = 3 where test_id=1;
 delete from questions where test_id = 2;
 
 -- С помощью JOIN выберите названия всех тестов и названия их категорий
-select t.title,c.title  from tests t, categories c where t.category_id=c.category_id;
-select tests.title, categories.title from tests join categories on tests.category_id=categories.category_id;
+select t.title as test_title ,c.title as cetegory_title from tests t, categories c where t.category_id=c.category_id;
+select tests.title  as test_title, categories.title  as cetegory_titlefrom tests join categories on tests.category_id=categories.category_id;
 
 -- С помощью JOIN выберите содержание всех вопросов (атрибут body) и названия связанных с ними тестов
 select q.body, t.title  from questions q, tests t where q.test_id=t.test_id;
