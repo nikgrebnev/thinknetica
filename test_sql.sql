@@ -4,24 +4,27 @@ CREATE DATABASE test_guru;
 -- Таблицу categories с атрибутом title
 --DROP TABLE categories;
 CREATE TABLE categories (
-category_id bigserial PRIMARY KEY,
-title text
+    category_id bigserial PRIMARY KEY,
+    title text
 );
 
 -- Таблицу tests в которой должны быть атрибуты title, level, внешний ключ к таблице categories
 CREATE TABLE tests (
-test_id bigserial PRIMARY KEY,
-title text,
-level smallint,
-category_id bigint REFERENCES categories(category_id)
+    test_id bigserial PRIMARY KEY,
+    title text,
+    level smallint,
+    category_id bigint REFERENCES categories(category_id)
 );
+create index tests_i1 on tests(level);
+create index tests_i2 on tests(category_id);
 
 -- Таблицу questions в которой должен быть атрибут body и внешний ключ к таблице tests
 CREATE TABLE questions (
-question_id bigserial PRIMARY KEY,
-body text,
-test_id bigint REFERENCES tests(test_id)
+    question_id bigserial PRIMARY KEY,
+    body text,
+    test_id bigint REFERENCES tests(test_id)
 );
+create index questions_i1 on questions(test_id);
 
 -- Создайте 3 строки в таблице categories
 insert into categories(title) values 
